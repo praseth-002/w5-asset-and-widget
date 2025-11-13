@@ -1,3 +1,5 @@
+// import 'dart:nativewrappers/_internal/vm/lib/ffi_patch.dart';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 
@@ -43,6 +45,8 @@ import 'package:flutter/material.dart';
 //   );
 // }
 
+
+
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
@@ -51,27 +55,76 @@ void main() {
         padding: EdgeInsets.all(50),
         color: Colors.blue,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.all(50),
-              decoration: BoxDecoration(
-                color: Colors.white,  
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-              ),
-              child: Column(
-                children: [
-                  Image(image: AssetImage('assets/dart.png')),
-                  Text("DART", style: TextStyle(fontSize: 50),),
-                  Text("the best object language."),
-                ],
-              ),
-            )
+            ProductCard(product: Product.dart,),
+            ProductCard(product: Product.firebase,),
+            ProductCard(product: Product.flutter,),
           ],
         ),
       ),
     ),
   ));
+}
+
+enum Product {
+  dart(
+    title: 'DART',
+    description: 'The best object language.',
+    image: 'assets/dart.png',
+  ),
+  flutter(
+    title: 'Flutter',
+    description: 'The best UI toolkit.',
+    image: 'assets/flutter.png',
+  ),
+  firebase(
+    title: 'Firebase',
+    description: 'The best backend service.',
+    image: 'assets/firebase.png',
+  );
+
+  final String title;
+  final String description;
+  final String image;
+
+  const Product({
+    required this.title,
+    required this.description,
+    required this.image,
+  });
+}
+
+class ProductCard extends StatelessWidget {
+  final Product product;
+  const ProductCard({
+    super.key,
+    required this.product
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsetsGeometry.all(20),
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image(image: AssetImage(product.image), width: 75,),
+                SizedBox(height: 10,),
+                Text(product.title, style: TextStyle(fontSize: 25),),
+                SizedBox(height: 10,),
+                Text(product.description)
+              ],
+            ),
+            // SizedBox(width: 5,)
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 enum ButtonType {Primary, Secondary, Disabled}
