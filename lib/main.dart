@@ -243,18 +243,76 @@ void main() {
         child: Column(
           children: [
             CustomAppBar(),
-            Expanded(child: ListView(
-              children: [
-                WeatherCard(weatherIcon: 'assets/cloudy.png', city: 'Phnom Penh', minTemp: '10.0', maxTemp: '30.0', curTemp: '12.2', gradient: Colors.purple,),
-                WeatherCard(weatherIcon: 'assets/sunnyCloudy.png', city: 'Paris', minTemp: '10.0', maxTemp: '40.0', curTemp: '22.2', gradient: Colors.green,),
-                WeatherCard(weatherIcon: 'assets/sunny.png', city: 'Rome', minTemp: '10.0', maxTemp: '40.0', curTemp: '45.2', gradient: Colors.red,),
-                WeatherCard(weatherIcon: 'assets/veryCloudy.png', city: 'Toulouse', minTemp: '10.0', maxTemp: '40.0', curTemp: '45.2', gradient: Colors.orange,),
-                WeatherCard(weatherIcon: 'assets/cloudy.png', city: 'Phnom Penh', minTemp: '10.0', maxTemp: '30.0', curTemp: '12.2', gradient: Colors.purple,),
-                WeatherCard(weatherIcon: 'assets/sunnyCloudy.png', city: 'Paris', minTemp: '10.0', maxTemp: '40.0', curTemp: '22.2', gradient: Colors.green,),
-                WeatherCard(weatherIcon: 'assets/sunny.png', city: 'Rome', minTemp: '10.0', maxTemp: '40.0', curTemp: '45.2', gradient: Colors.red,),
-                WeatherCard(weatherIcon: 'assets/veryCloudy.png', city: 'Toulouse', minTemp: '10.0', maxTemp: '40.0', curTemp: '45.2', gradient: Colors.orange,),
-              ],
-            ))
+            Expanded(
+              child: ListView(
+                children: [
+                  WeatherCard(
+                    weatherIcon: 'assets/cloudy.png',
+                    city: 'Phnom Penh',
+                    minTemp: '10.0',
+                    maxTemp: '30.0',
+                    curTemp: '12.2',
+                    gradient: Colors.purple,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/sunnyCloudy.png',
+                    city: 'Paris',
+                    minTemp: '10.0',
+                    maxTemp: '40.0',
+                    curTemp: '22.2',
+                    gradient: Colors.green,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/sunny.png',
+                    city: 'Rome',
+                    minTemp: '10.0',
+                    maxTemp: '40.0',
+                    curTemp: '45.2',
+                    gradient: Colors.red,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/veryCloudy.png',
+                    city: 'Toulouse',
+                    minTemp: '10.0',
+                    maxTemp: '40.0',
+                    curTemp: '45.2',
+                    gradient: Colors.orange,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/cloudy.png',
+                    city: 'Phnom Penh',
+                    minTemp: '10.0',
+                    maxTemp: '30.0',
+                    curTemp: '12.2',
+                    gradient: Colors.purple,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/sunnyCloudy.png',
+                    city: 'Paris',
+                    minTemp: '10.0',
+                    maxTemp: '40.0',
+                    curTemp: '22.2',
+                    gradient: Colors.green,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/sunny.png',
+                    city: 'Rome',
+                    minTemp: '10.0',
+                    maxTemp: '40.0',
+                    curTemp: '45.2',
+                    gradient: Colors.red,
+                  ),
+                  WeatherCard(
+                    weatherIcon: 'assets/veryCloudy.png',
+                    city: 'Toulouse',
+                    minTemp: '10.0',
+                    maxTemp: '40.0',
+                    curTemp: '45.2',
+                    gradient: Colors.orange,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -270,13 +328,19 @@ class WeatherCard extends StatelessWidget {
   final String curTemp;
   final MaterialColor gradient;
   const WeatherCard({
-    super.key, required this.weatherIcon, required this.city, required this.minTemp, required this.maxTemp, required this.curTemp, required this.gradient,
+    super.key,
+    required this.weatherIcon,
+    required this.city,
+    required this.minTemp,
+    required this.maxTemp,
+    required this.curTemp,
+    required this.gradient,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
       child: Column(
         children: [
           PhysicalModel(
@@ -290,10 +354,7 @@ class WeatherCard extends StatelessWidget {
               decoration: BoxDecoration(
                 // borderRadius: BorderRadius.all(Radius.circular(25)),
                 gradient: LinearGradient(
-                  colors: [
-                    gradient.shade400,
-                    gradient.shade800,
-                  ],
+                  colors: [gradient.shade400, gradient.shade800],
                 ),
               ),
               child: Column(
@@ -304,9 +365,7 @@ class WeatherCard extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
                           radius: 30,
-                          backgroundImage: AssetImage(
-                            weatherIcon,
-                          ),
+                          backgroundImage: AssetImage(weatherIcon),
                         ),
                       ),
                       Column(
@@ -339,16 +398,13 @@ class WeatherCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Expanded(
-                        child: Container(color: Colors.transparent),
-                      ),
-                      Text(
-                        "$curTemp°C",
-                        style: TextStyle(
-                          decoration: TextDecoration.none,
-                          color: Colors.white,
-                          fontSize: 24,
-                        ),
+                      Expanded(child: Container(color: Colors.transparent)),
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Positioned(left: -100, top: -50, child: CircleAvatar(backgroundColor: gradient.shade500, radius: 100),),
+                          Text("$curTemp°C", style: TextStyle(decoration: TextDecoration.none, color: Colors.white, fontSize: 24,)),
+                        ],
                       ),
                     ],
                   ),
